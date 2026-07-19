@@ -1,4 +1,8 @@
-import { renderTask } from "./render-tasks";
+import {
+  saveToLocalStorageTask,
+  getTasksFromLocalStorage,
+} from './local-storage-api';
+import { renderTask, renderTaskList } from './render-tasks';
 
 export function onFormSubmit(event) {
   event.preventDefault();
@@ -13,12 +17,13 @@ export function onFormSubmit(event) {
     name: taskName.value,
     description: taskDescription.value,
   };
-  console.log(newTask);
+  saveToLocalStorageTask(newTask);
 
   renderTask(newTask);
 
   event.currentTarget.reset();
 }
 
-
-
+export function initPage() {
+  renderTaskList(getTasksFromLocalStorage() || []);
+}
