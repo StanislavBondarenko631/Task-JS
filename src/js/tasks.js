@@ -1,8 +1,11 @@
 import {
   saveToLocalStorageTask,
   getTasksFromLocalStorage,
+  filterList,
 } from './local-storage-api';
 import { renderTask, renderTaskList } from './render-tasks';
+import {nanoid} from "nanoid"
+
 
 export function onFormSubmit(event) {
   event.preventDefault();
@@ -14,6 +17,7 @@ export function onFormSubmit(event) {
   }
 
   const newTask = {
+    id: nanoid(),
     name: taskName.value,
     description: taskDescription.value,
   };
@@ -26,4 +30,11 @@ export function onFormSubmit(event) {
 
 export function initPage() {
   renderTaskList(getTasksFromLocalStorage() || []);
+}
+
+export function deleteTask(event){
+  if ( event.target.nodeName !== "BUTTON")return
+  const id = event.target.parentElement.dataset.id
+  event.target.parentElement.remove()
+  filterList(id)
 }

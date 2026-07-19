@@ -15,7 +15,9 @@
   </li>
 */
 import refs from './js/refs';
-import { initPage, onFormSubmit } from './js/tasks';
+import { deleteTask, initPage, onFormSubmit } from './js/tasks';
+
+refs.list.addEventListener("click", deleteTask)
 
 document.addEventListener('DOMContentLoaded', initPage);
 refs.taskForm.addEventListener('submit', onFormSubmit);
