@@ -1,3 +1,5 @@
+import { renderTask } from "./render-tasks";
+
 export function onFormSubmit(event) {
   event.preventDefault();
   const { taskName, taskDescription } = event.target.elements;
@@ -12,5 +14,11 @@ export function onFormSubmit(event) {
     description: taskDescription.value,
   };
   console.log(newTask);
+
+  renderTask(newTask);
+
   event.currentTarget.reset();
 }
+
+
+
